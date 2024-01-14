@@ -1,10 +1,6 @@
 # Projet1
 **Système de gestion d'une bibliothèque**
 
-Membres du groupe:
-- MBOUOPDA FOTIE Christler Jefferson
-- Nermine SBOUI
-- Lucas Lopez MAPE
 
 Vous êtes chargés de concevoir un système de gestion pour une bibliothèque municipale qui souhaite informatiser ses activités : catalogage, consultations, gestion des utilisateurs, prêts, etc.
 
