@@ -1,11 +1,6 @@
 # Projet1
 **Système de gestion d'une bibliothèque**
 
-Membres du groupe:
-- MBOUOPDA FOTIE Christler Jefferson
-- Nermine SBOUI
-- Lucas Lopez MAPE
-- Clement Martin
 
 Remarques :
 - Le rapport a été rédigé sur Overleaf pour une meilleure qualité du rendu.
