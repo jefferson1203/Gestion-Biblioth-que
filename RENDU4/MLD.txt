@@ -1,0 +1,153 @@
+0-EtatExamplaire{Nom : {Neuf, Bon, Abime, Perdu}}
+   
+    Nom NOT NULL
+
+1- Exemplaire {IdExamplaire : Chaines, disponible : {yes, no}, code -->Ressource, Etat --> EtatExamplaire } 
+
+    
+    disponible : NOT NULL, 
+
+    Code :   Key 
+
+ 
+2- Ressource {#code : entier, titre : Chaines, dateApparition : date, editeur :  Chaines, genre : Chaines, codeClassification :  Chaines (4)} 
+
+ 
+      CodeClassification : NOT NULL 
+
+
+3- Livre {#code --> Ressource, ISBN : entier, Resume : Chaines, Langue : Chaines} 
+
+  
+
+4- Film {#code --> Ressource, longueur : temps, synopsis : Chaines, langue : Chaines} 
+
+       
+       Longueur : NOT NULL 
+
+
+5- Musique {#code --> Ressource, longueur : temps} 
+   
+
+      Longueur : NOT NULL 
+
+ 
+6- Auteur {#code --> Ressource, nom --> Contributeur (nom),  prenom -->Contributeur (prenom), dateDeNaissance --> Contributeur(dateDeNaissance)} 
+
+
+       (nom, prenom, dateDeNaissance)  UNIQUE NOT NULL, clé étrangère 
+
+       #code clé étrangère 
+
+      (nom, prenom, dateDeNaissance), #code    clé primaire 
+
+ 
+
+7- Auteur {#code --> Ressource, nom --> Contributeur (nom), prenom -->Contributeur (prenom), dateDeNaissance --> Contributeur(dateDeNaissance)} 
+
+
+       (nom, prenom, dateDeNaissance)  UNIQUE NOT NULL, clé étrangère 
+
+       #code clé étrangère 
+
+      (nom, prenom, dateDeNaissance), #code    clé primaire 
+
+ 
+
+8- Acteur {#code --> Ressource, nom --> Contributeur (nom),  prenom -->Contributeur (prenom),  dateDeNaissance --> Contributeur(dateDeNaissance)} 
+
+ 
+       (nom, prenom, dateDeNaissance)  UNIQUE NOT NULL, clé étrangère 
+
+       #code clé étrangère 
+
+      (nom, prenom, dateDeNaissance), #code    clé primaire 
+
+ 
+
+9- Realisateur {#code --> Ressource, nom --> Contributeur (nom),  prenom -->Contributeur (prenom), dateDeNaissance --> Contributeur(dateDeNaissance)} 
+
+ 
+       (nom, prenom, dateDeNaissance)  UNIQUE NOT NULL, clé étrangère 
+
+       #code clé étrangère 
+
+      (nom, prenom, dateDeNaissance), #code    clé primaire 
+
+  
+
+10- Compositeur {#code --> Ressource, nom --> Contributeur (nom),  prenom -->Contributeur (prenom), dateDeNaissance --> Contributeur(dateDeNaissance)} 
+
+
+       (nom, prenom, dateDeNaissance)  UNIQUE NOT NULL, clé étrangère 
+
+       #code clé étrangère 
+
+      (nom, prenom, dateDeNaissance), #code    clé primaire 
+
+ 
+
+11- Interprete {#code --> Ressource, nom --> Contributeur (nom), prenom -->Contributeur (prenom),  dateDeNaissance --> Contributeur       (dateDeNaissance)} 
+
+ 
+
+       (nom, prenom, dateDeNaissance)  UNIQUE NOT NULL, clé étrangère 
+
+       #code clé étrangère 
+
+      (nom, prenom, dateDeNaissance), #code    clé primaire 
+
+ 
+
+12- compteUtilisateur {#login : Chaines (7), mdp : Chaines} 
+
+      
+
+      Mdp : NOT NULL 
+
+ 
+
+13- Membre {#Mail : e-mail, nom : Chaines, prenom : chaine, dateDeNaissance : date,   Adresse : Chaines}  
+
+                    
+
+14- Historique {#login --> CompteUtilisateur, #Mail --> Membre, debut : date, fin : date} 
+
+       
+
+      Debut > fin 
+
+     Debut, fin NOT NULL 
+
+ 
+
+15- Personnel {#Mail : e-mail} 
+
+ 
+
+16- Adherent { #Mail : e-mail, Telephone : Chaines (10), dateDeNaissance : date} 
+
+    
+
+      Telephone : NOT NULL 
+
+ 
+
+17- Empreinte {date : date, duree : temps, #codeRessource --> Ressource,  #MailAdherent --> Adherent} 
+
+ 
+
+18- Adhesion {dateDebut : date, dateFin : date, e-Mail --> Adherent} 
+
+ 
+
+      e-Mail  clé étrangère NOT NULL 
+
+ 
+
+19- Sanction {type {RETARD, SANCTION, BLACKLIST}, dateDebut : date,   dateFin : date, e-Mail --> Adherent} 
+
+
+         e-Mail  clé étrangère NOT NULL 
+
+ 

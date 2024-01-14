@@ -1,0 +1,48 @@
+
+1/exemplaire : Etat : {Neuf, Bon, Abime, Perdu} avec état NOT NULL
+
+2/une ressource : code, un titre, une liste de contributeurs, une date d'apparition, un éditeur, un genre et un code de    
+
+  classification,  avec code de classification NOT NULL & code PK
+
+    • Héritage de la classe ressource aux classes filles  (livre/film/musique) 
+
+3/ Livre : ISBN , Résumé , Langue  avec ISBN NOT NULL 
+
+4/ Film : longueur, synopsis , langue avec longueur NOT NULL  
+
+5/ un contributeur : nom, prénom, dateDeNaissance, nationalité avec (nom,prenom, dateDeNaissance) PK 
+
+6/musique : longueur avec longeur NOT NULL 
+
+7/membre : nom,prenom,dateDeNaissance,AdresseMail: PK avec mail  PK
+
+    • Héritage de la classe membre aux classes filles (personnel &adherents) 
+
+8/compte d’utilisateur : login,mdp avec login PK
+
+9/personnel : dispose d'un compte utilisateur 
+
+10/adhèrent : Telephone,dateDeNaissance avec telephone NOT NULL 
+
+    • Dispose d'un compte utilisateur ainsi que d'une carte d'adhérent 
+
+11/adhésion : dateDebut, dateFIn avec dateDbeut> dateFin
+
+12/sanction : type: {RETARD, SANCTION, BLACKLIST},dateDebut,dateFin
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

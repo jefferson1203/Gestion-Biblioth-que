@@ -1,0 +1,155 @@
+-- Table Exemplaire
+CREATE TABLE Exemplaire (
+    Etat VARCHAR(20) NOT NULL,
+    Code INT PRIMARY KEY
+);
+
+-- Table Ressource
+CREATE TABLE Ressource (
+    Code INT PRIMARY KEY,
+    Titre VARCHAR(255),
+    DateApparition DATE,
+    Editeur VARCHAR(255),
+    Genre VARCHAR(255),
+    CodeClassification VARCHAR(4) NOT NULL
+);
+
+-- Table Livre
+CREATE TABLE Livre (
+    Code INT PRIMARY KEY,
+    ISBN INT,
+    Resume VARCHAR(1000),
+    Langue VARCHAR(255),
+    FOREIGN KEY (Code) REFERENCES Ressource(Code)
+);
+
+-- Table Film
+CREATE TABLE Film (
+    Code INT PRIMARY KEY,
+    Longueur TIME NOT NULL,
+    Synopsis VARCHAR(1000),
+    Langue VARCHAR(255),
+    FOREIGN KEY (Code) REFERENCES Ressource(Code)
+);
+
+-- Table Musique
+CREATE TABLE Musique (
+    Code INT PRIMARY KEY,
+    Longueur TIME NOT NULL,
+    FOREIGN KEY (Code) REFERENCES Ressource(Code)
+);
+
+-- Table Contributeur
+CREATE TABLE Contributeur (
+    Nom VARCHAR(255) NOT NULL,
+    Prenom VARCHAR(255) NOT NULL,
+    DateDeNaissance DATE NOT NULL,
+    PRIMARY KEY (Nom, Prenom, DateDeNaissance)
+);
+
+-- Tables Auteur, Acteur, Realisateur, Compositeur, Interprete
+CREATE TABLE Auteur (
+    Code INT PRIMARY KEY,
+    Nom VARCHAR(255) NOT NULL,
+    Prenom VARCHAR(255) NOT NULL,
+    DateDeNaissance DATE NOT NULL,
+    FOREIGN KEY (Nom, Prenom, DateDeNaissance) REFERENCES Contributeur(Nom, Prenom, DateDeNaissance),
+    FOREIGN KEY (Code) REFERENCES Ressource(Code)
+);
+
+CREATE TABLE Realisateur (
+    Code INT PRIMARY KEY,
+    Nom VARCHAR(255) NOT NULL,
+    Prenom VARCHAR(255) NOT NULL,
+    DateDeNaissance DATE NOT NULL,
+    FOREIGN KEY (Nom, Prenom, DateDeNaissance) REFERENCES Contributeur(Nom, Prenom, DateDeNaissance),
+    FOREIGN KEY (Code) REFERENCES Ressource(Code)
+);
+
+CREATE TABLE Compositeur (
+    Code INT PRIMARY KEY,
+    Nom VARCHAR(255) NOT NULL,
+    Prenom VARCHAR(255) NOT NULL,
+    DateDeNaissance DATE NOT NULL,
+    FOREIGN KEY (Nom, Prenom, DateDeNaissance) REFERENCES Contributeur(Nom, Prenom, DateDeNaissance),
+    FOREIGN KEY (Code) REFERENCES Ressource(Code)
+);
+
+CREATE TABLE Interprete (
+    Code INT PRIMARY KEY,
+    Nom VARCHAR(255) NOT NULL,
+    Prenom VARCHAR(255) NOT NULL,
+    DateDeNaissance DATE NOT NULL,
+    FOREIGN KEY (Nom, Prenom, DateDeNaissance) REFERENCES Contributeur(Nom, Prenom, DateDeNaissance),
+    FOREIGN KEY (Code) REFERENCES Ressource(Code)
+);
+
+-- Tables Acteur, Realisateur, Compositeur, Interprete (similaires à Auteur)
+-- ...
+
+-- Table compteUtilisateur
+CREATE TABLE compteUtilisateur (
+    Login VARCHAR(7) PRIMARY KEY,
+    Mdp VARCHAR(255) NOT NULL
+);
+
+-- Table Membre
+CREATE TABLE Membre (
+    Mail VARCHAR(255) PRIMARY KEY,
+    Nom VARCHAR(255),
+    Prenom VARCHAR(255),
+    DateDeNaissance DATE,
+    Adresse VARCHAR(255)
+);
+
+-- Table Historique
+CREATE TABLE Historique (
+    Login VARCHAR(7) REFERENCES compteUtilisateur(Login),
+    Mail VARCHAR(255) REFERENCES Membre(Mail),
+    Debut DATE NOT NULL,
+    Fin DATE NOT NULL,
+    PRIMARY KEY (Login, Mail),
+    CHECK (Debut > Fin)
+);
+
+-- Table Personnel
+CREATE TABLE Personnel (
+    Mail VARCHAR(255) PRIMARY KEY,
+    FOREIGN KEY (Mail) REFERENCES Membre(Mail)
+);
+
+-- Table Adherent
+CREATE TABLE Adherent (
+    Mail VARCHAR(255) PRIMARY KEY,
+    Telephone VARCHAR(10) NOT NULL,
+    DateDeNaissance DATE
+);
+
+-- Table Empreinte
+CREATE TABLE Empreinte (
+    DateEmpreinte DATE,
+    Duree TIME,
+    CodeRessource INT REFERENCES Ressource(Code),
+    MailAdherent VARCHAR(255) REFERENCES Adherent(Mail)
+);
+
+-- Table Adhesion
+CREATE TABLE Adhesion (
+    DateDebut DATE,
+    DateFin DATE,
+    MailAdherent VARCHAR(255) REFERENCES Adherent(Mail),
+    PRIMARY KEY (MailAdherent),
+    CHECK (DateDebut < DateFin)
+);
+
+-- Table Sanction
+CREATE TABLE Sanction (
+    Type VARCHAR(20),
+    DateDebut DATE,
+    DateFin DATE,
+    MailAdherent VARCHAR(255) REFERENCES Adherent(Mail),
+    PRIMARY KEY (MailAdherent),
+    CHECK (Type IN ('RETARD', 'SANCTION', 'BLACKLIST'))
+);
+
+
